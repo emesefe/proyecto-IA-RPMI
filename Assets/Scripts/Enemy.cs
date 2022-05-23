@@ -10,11 +10,10 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private FollowRoute followRouteScript;
     private Transform player;
 
-    private float visionRange = 20;
-    private float attackRange = 10;
+    private float visionRange = 20f;
+    private float attackRange = 10f;
 
     private bool playerInVisionRange;
     private bool playerInAttackRange;
@@ -24,7 +23,7 @@ public class Enemy : MonoBehaviour
     
     // Patrulla
     [SerializeField] private Transform[] points;
-    private float speed = 5;
+    private float speed = 5f;
     private int totalPoints;
     private int nextPoint;
 
@@ -54,39 +53,39 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        /*
+        
         // Campos de visión y ataque del agente
         Vector3 pos = transform.position;
         playerInVisionRange = Physics.CheckSphere(pos, visionRange, playerLayer);
         playerInAttackRange = Physics.CheckSphere(pos, attackRange, playerLayer);
-        */
+        
 
-        /*
+        
         // Activamos la lógica de patrulla
         if (!playerInVisionRange && !playerInAttackRange)
         {
             FollowPatrolRoute();
         }
-        */
+        
 
-        /*
+        
         // Activamos la lógica de persecución 
         if (playerInVisionRange && !playerInAttackRange)
         {
             Chase();
         }
-        */
+        
 
-        /*
+        
         // Activamos la lógica de ataque
         if (playerInVisionRange && playerInAttackRange)
         {
             Attack();
         }
-        */
+        
     }
 
-    /*
+    
     // Lógica de patrulla dle agente
     private void FollowPatrolRoute()
     {
@@ -113,7 +112,7 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(points[nextPoint].position);
     }
 
-    /*
+    
     // Lógica de persecución del agente
     private void Chase()
     {
@@ -121,15 +120,16 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(player.position);
         transform.LookAt(player);
     }
-    */
+    
 
     
-    /*
+    
     // Lógica de ataque del agente
     private void Attack()
     {
         // Paramos al agente
         agent.SetDestination(transform.position);
+        transform.LookAt(player.position);
         
         // Si hemos finalizado el Attack Cooldown
         if (canAttack)
@@ -151,10 +151,10 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenAttacks);
         canAttack = true;
     }
-    */
+    
     
 
-    /*
+  
     // Esta función nos permite dibujar Gizmos
     private void OnDrawGizmos()
     {
@@ -166,5 +166,4 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-    */
 }
